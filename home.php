@@ -20,12 +20,13 @@
 	
         <section id="form">
             <div class="container">
-                    <div class="card p-4">
+                    <div class="card p-4 bg-dark text-white">
+                        <div class="card-head"><h1>SANN HOTEL</h1></div>
                         <div class="card-body">
                             <form action="conta.php" method="post">
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label for="exampleInputEmail1">Second Name</label>
+                                        <label for="exampleInputEmail1">First Name</label>
                                         <input type="text" class="form-control" name="fname"  placeholder="Enter email">
                                     </div>
                                     <div class="form-group col-md-6">
@@ -57,13 +58,13 @@
                                 <div class="form-group col-md-6">
                                     <div class="form-check">
                                         <input class="form-check-input" name="room[]"type="checkbox" id="gridCheck">
-                                        <label class="form-check-label" for="gridCheck">Check me out</label>
+                                        <label class="form-check-label" for="gridCheck">AC</label>
                                     </div>
                                  </div>
                                  <div class="form-group col-md-6">
                                     <div class="form-check">
                                         <input class="form-check-input" name="room[]"type="checkbox" id="gridCheck">
-                                        <label class="form-check-label" for="gridCheck">Check me out</label>
+                                        <label class="form-check-label" for="gridCheck">NON AC</label>
                                     </div>
                                  </div>
                                  <div class="form-group col-md-6">
@@ -74,7 +75,7 @@
                                 </div> -->
 
                                 <div class="form-group col-md-6">
-                                <a href="" class="btn btn-danger mt-2">view</a>
+                                <a href="view.php" class="btn btn-danger mt-2">view</a>
 
                                 </div>
                                 
