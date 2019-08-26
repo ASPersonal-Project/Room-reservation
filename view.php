@@ -30,7 +30,7 @@ $con = mysqli_connect("localhost","root","","hotel");
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         
-                                        <input type="text" class="form-control" name="fname" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
+                                        <input type="text" class="form-control" name="searchname" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <input type="submit" value="Search" name="submit" class="btn btn-primary ">
@@ -38,7 +38,7 @@ $con = mysqli_connect("localhost","root","","hotel");
                                 </div>
                                 <?php
                                     if(isset($_REQUEST['submit'])){
-                                        $studentNo = $_REQUEST['fname'];
+                                        $studentNo = $_REQUEST['searchname'];
                                         $get_sNo = "select* from booking where fname ='".$studentNo."'";
                                     
                                         $query = mysqli_query($con,$get_sNo);
@@ -50,8 +50,8 @@ $con = mysqli_connect("localhost","root","","hotel");
                                 ?>
                                  <div class="row">
                                 <div class="form-group col-md-6">
-                                        <label for="exampleInputEmail1">Second Name</label>
-                                        <input type="text" class="form-control" name="sname" value="<?php echo $row_sNo['fname'];?>" placeholder="Enter email">
+                                        <label for="exampleInputEmail1">First Name</label>
+                                        <input type="text" class="form-control" name="fname" value="<?php echo $row_sNo['fname'];?>" placeholder="Enter email">
                                     </div>
                                     
                                     <div class="form-group col-md-6">
@@ -64,8 +64,16 @@ $con = mysqli_connect("localhost","root","","hotel");
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="exampleInputEmail1">Tel No</label>
-                                        <input type="text" class="form-control" name="tno" value="<?php echo $row_sNo['fname'];?>"  placeholder="Enter email">
+                                        <input type="text" class="form-control" name="tno" value="<?php echo $row_sNo['tno'];?>"  placeholder="Enter email">
                                     </div> 
+                                    
+                                    <div class="form-group col-md-6">
+                                        <a href="home.php" class="btn btn-primary">BACK</a>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input type="submit" name="delete" class="btn btn-danger" value="DELETE">
+                                    </div>
+                                
                                     <?php
                                     }
 
@@ -77,6 +85,21 @@ $con = mysqli_connect("localhost","root","","hotel");
                                    
 
                             </form>
+                            <?php
+                                if(isset($_REQUEST['delete'])){
+                                    $fname = $_REQUEST['fname'];
+                                    $query2 = "DELETE from booking WHERE fname ='".$fname."'";
+
+                                    $result = mysqli_query($con,$query2);
+
+                                    if($result){
+                                        echo '<script>alert("successfully!")</script>';
+                                    }
+
+                                    
+
+                                }
+                            ?> 
 
                         </div>
                     </div>
