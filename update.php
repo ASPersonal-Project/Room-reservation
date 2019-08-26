@@ -23,7 +23,7 @@
                     <div class="card p-4 bg-dark text-white">
                         <div class="card-head"><h1>SANN HOTEL</h1></div>
                         <div class="card-body">
-                            <form action="conta.php" method="post">
+                            <form action="update.php" method="post">
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="exampleInputEmail1">First Name</label>
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="row">
                                 <div class="form-group col-md">
-                                        <input type="submit" value="UPDATE" name="submit" class="btn btn-danger btn-block ">
+                                        <input type="submit" value="UPDATE" name="update" class="btn btn-danger btn-block ">
                                 </div>
                                 </div>
 
@@ -89,6 +89,32 @@
                                        
                                     
 </section>
+<?php 
+
+$con = mysqli_connect("localhost","root","","hotel");
+
+    $name = $_REQUEST['name'];
+    // echo $name;
+    if(isset($_REQUEST['update'])){
+       
+        
+        $fname = $_REQUEST['fname'];
+        $sname = $_REQUEST['sname'];
+        $email = $_REQUEST['email'];
+        $tno = $_REQUEST['tno'];
+
+        $query = "UPDATE booking SET fname='$fname',sname='$sname',email='$email',tno='$tno' where fname = $name";
+
+        mysqli_query($con,$query);
+
+        
+
+        
+
+    }
+    // header("location:view.php");
+
+?>
    
 
 
