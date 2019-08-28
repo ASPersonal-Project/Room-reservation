@@ -24,10 +24,10 @@
                         <div class="card-body">
                             <form action="reservation.php" method="post">
                                 <div class="row">
-                                    <!-- <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6">
                                         <label >Customer ID</label>
                                         <input type="text" class="form-control" name="c_id"  placeholder="Customer ID" >
-                                    </div> -->
+                                    </div>
                                     <div class="form-group col-md-6">
                                         <label >Reservation No</label>
                                         <input type="text" class="form-control" name="r_no"  placeholder="Reservation No">
@@ -44,10 +44,10 @@
                                         <label >Check Out Date</label>
                                         <input type="date" class="form-control" name="out_date"  placeholder="Check Out Date">
                                     </div>
-                                    <!-- <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6">
                                         <label >Billing No</label>
                                         <input type="text" class="form-control" name="bill_no"  placeholder="Billing No" >
-                                    </div> -->
+                                    </div>
                                     <!-- <div class="form-group col-md-6">
                                         <label >Room Charge</label>
                                         <input type="text" class="form-control" name="room_charge"  placeholder="Room Charge" >
@@ -75,19 +75,19 @@
 $con = mysqli_connect("localhost","root","","hotel");
 
 if(isset($_POST['submit'])){
-    // $Customer_id = $_REQUEST['c_id'];
+    $Customer_id = $_REQUEST['c_id'];
     $Reservation_no = $_REQUEST['r_no'];
     $Numberofpeople = $_REQUEST['numberofpeople'];
     $In_date = $_REQUEST['in_date'];
     $Out_date = $_REQUEST['out_date'];
-    // $Bill_no = $_REQUEST['bill_no'];
+    $Bill_no = $_REQUEST['bill_no'];
     // $room_charge = $_REQUEST['room_charge'];
 	// $b = implode(",",$room);
 	// $Message = $_REQUEST['message'];
 	
 	$reservation_details =  "INSERT INTO  reservation(Reservation_no,No_of_guests,Check_in_date,Check_out_date) VALUES('$Reservation_no','$Numberofpeople','$In_date','$Out_date')";
 	mysqli_query($con,$reservation_details);
-    // header("location:home.php");
+    header("location:room.php");
     // ,'$In_date','$Out_date','$Bill_no'
     // ,Check_in_date,Check_out_date,Billing_no
 }

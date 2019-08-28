@@ -1,4 +1,26 @@
 
+<?php
+$con = mysqli_connect("localhost","root","","hotel");
+
+if(isset($_REQUEST['submit'])){
+    $FName = $_REQUEST['f_name'];
+    $LName = $_REQUEST['l_name'];
+    $CId = $_REQUEST['c_id'];
+    $CNo = $_REQUEST['c_no'];
+    $Address = $_REQUEST['address'];
+	// $room = $_REQUEST['room'];
+	// $b = implode(",",$room);
+	// $Message = $_REQUEST['message'];
+	
+	$Customer_details = "INSERT INTO  customer(F_name,L_name,Customer_ID,Contact_no,Address) VALUES('$FName','$LName','$CId','$CNo','$Address')";
+    mysqli_query($con,$Customer_details);
+    
+    //$Rcustomerid = mysql_insert_id($con);
+	 header("Location: reservation.php");
+}
+
+
+?> 
 
 <!Doctype html>
 <html>
@@ -22,7 +44,7 @@
                             <h1>SANN HOTEL</h1>
                         </div>
                         <div class="card-body">
-                            <form action="" method="post">
+                            <form action="#" method="post">
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label >First Name</label>
@@ -60,12 +82,12 @@
                                             <label class="form-check-label" for="gridCheck">NON AC</label>
                                         </div>
                                     </div> -->
-                                    <!-- <div class="form-group col-md-6">
-                                            <input type="submit" value="Submit" name="submit" class="btn btn-outline-danger ">
-                                    </div> -->
                                     <div class="form-group col-md-6">
-                                        <a href="reservation.php" name="submit" class="btn btn-danger mt-2">submit</a>
+                                            <input type="submit" value="Submit" name="submit" class="btn btn-outline-danger ">
                                     </div>
+                                    <!-- <div class="form-group col-md-6">
+                                        <a href="" name="submit" class="btn btn-danger mt-2">submit</a>
+                                    </div> -->
                                 </div>
                             </form>
                         </div>
@@ -75,25 +97,3 @@
 </body>
 </html>
 
-<?php
-$con = mysqli_connect("localhost","root","","hotel");
-
-if(isset($_POST['submit'])){
-    $FName = $_REQUEST['f_name'];
-    $LName = $_REQUEST['l_name'];
-    $CId = $_REQUEST['c_id'];
-    $CNo = $_REQUEST['c_no'];
-    $Address = $_REQUEST['address'];
-	// $room = $_REQUEST['room'];
-	// $b = implode(",",$room);
-	// $Message = $_REQUEST['message'];
-	
-	$Customer_details = "INSERT INTO  customer(F_name,L_name,Customer_ID,Contact_no,Address) VALUES('$FName','$LName','$CId','$CNo','$Address')";
-    mysqli_query($con,$Customer_details);
-    
-    //$Rcustomerid = mysql_insert_id($con);
-	 //header("location:reservation.php");
-}
-
-
-?>

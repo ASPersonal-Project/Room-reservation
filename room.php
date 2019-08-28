@@ -1,3 +1,24 @@
+<?php
+$con = mysqli_connect("localhost","root","","hotel");
+
+if(isset($_POST['submit'])){
+    $Room_number = $_REQUEST['r_number'];
+    $Numberofmax = $_REQUEST['nubmerofmax'];
+	$Room = $_REQUEST['room'];
+    $b = implode(",",$Room);
+    $Room_charge = $_REQUEST['room_charge'];
+    $Bill_no = $_REQUEST['b_no'];
+    $Payment = $_REQUEST['payment'];
+    $c = implode(",",$Payment);
+	// $Message = $_REQUEST['message'];
+	
+	$Room_details = "INSERT INTO  room(F_name,L_name,Customer_ID,Contact_no,Address) VALUES('$FName','$LName','$CId','$CNo','$Address')";
+	mysqli_query($con,$Room_details);
+    header("location:index.php");
+}
+
+
+?>
 
 
 <!Doctype html>
@@ -22,20 +43,24 @@
                             <h1>Room</h1>
                         </div>
                         <div class="card-body">
-                            <form action="index.php" method="post">
+                            <form action="#" method="post">
                                 <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label >Reservation No</label>
+                                        <input type="text" class="form-control" name="r_number"  placeholder="Room Number" require>
+                                    </div>
                                     <div class="form-group col-md-6">
                                         <label >Room Number</label>
                                         <input type="text" class="form-control" name="r_number"  placeholder="Room Number" require>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label > Number Of Maxpeople</label>
-                                        <input type="text" class="form-control" name="r_number"  placeholder="Room Number" require>
+                                        <input type="text" class="form-control" name="numberofmax"  placeholder="Room Number" require>
                                     </div>
                                     
                                     <div class="form-group col-md-6">
                                         <div class="form-group">
-                                            <label > Number Of Maxpeople</label>
+                                            <label > Room Type</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" name="room[]"type="checkbox" >
@@ -56,11 +81,11 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label >Room Charge</label>
-                                        <input type="text" class="form-control" name="c_id"  placeholder="Customer ID">
+                                        <input type="text" class="form-control" name="room_charge"  placeholder="Customer ID">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label >Bill No</label>
-                                        <input type="text" class="form-control" name="c_id"  placeholder="Customer ID">
+                                        <input type="text" class="form-control" name="b_no"  placeholder="Customer ID">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <div class="form-group">
@@ -93,23 +118,3 @@
 </body>
 </html>
 
-<?php
-$con = mysqli_connect("localhost","root","","hotel");
-
-if(isset($_POST['submit'])){
-    $FName = $_REQUEST['f_name'];
-    $LName = $_REQUEST['l_name'];
-    $CId = $_REQUEST['c_id'];
-    $CNo = $_REQUEST['c_no'];
-    $Address = $_REQUEST['address'];
-	// $room = $_REQUEST['room'];
-	// $b = implode(",",$room);
-	// $Message = $_REQUEST['message'];
-	
-	$Customer_details = "INSERT INTO  customer(F_name,L_name,Customer_ID,Contact_no,Address) VALUES('$FName','$LName','$CId','$CNo','$Address')";
-	mysqli_query($con,$Customer_details);
-	// header("location:home.php");
-}
-
-
-?>
