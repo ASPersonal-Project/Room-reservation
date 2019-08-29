@@ -1,5 +1,7 @@
 
 <?php
+
+
 $con = mysqli_connect("localhost","root","","hotel");
 
 if(isset($_REQUEST['submit'])){
@@ -12,11 +14,29 @@ if(isset($_REQUEST['submit'])){
 	// $b = implode(",",$room);
 	// $Message = $_REQUEST['message'];
 	
-	$Customer_details = "INSERT INTO  customer(F_name,L_name,Customer_ID,Contact_no,Address) VALUES('$FName','$LName','$CId','$CNo','$Address')";
-    mysqli_query($con,$Customer_details);
+	$Customer_details = "INSERT INTO  customer(F_name,L_name,Customer_ID,Contact_no,Address) VALUES('$FName','$LName','$CId','$CNo','$Address');";
+    echo "INSERT INTO  customer(F_name,L_name,Customer_ID,Contact_no,Address) VALUES('$FName','$LName','$CId','$CNo','$Address')";
+    
+    $query = mysqli_query($con,$Customer_details);
+
+
+
+    // $reservation_details = "INSERT INTO  res2(Reservation_no,Customer_ID,No_of_guests,Check_in_date,Check_out_date) VALUES('12345325','$CId','5','2019-10-03','2019-10-15')";
+    //     echo "INSERT INTO  res2(Reservation_no,Customer_ID,No_of_guests,Check_in_date,Check_out_date) VALUES('12345325','$CId','5','2019-10-03','2019-10-15')";
+        
+    // $qury = mysqli_query($con,$reservation_details);
+
+    
+
+    
+
+    // $reservation_details = "INSERT INTO  res2(Reservation_no,Customer_ID,No_of_guests,Check_in_date,Check_out_date) VALUES('12345325','$CId','5','2019-10-03','2019-10-15')";
+    // echo "INSERT INTO  res2(Reservation_no,Customer_ID,No_of_guests,Check_in_date,Check_out_date) VALUES('12345325','$CId','5','2019-10-03','2019-10-15')";
+    
+    // mysqli_query($con,$reservation_details);
     
     //$Rcustomerid = mysql_insert_id($con);
-	 header("Location: reservation.php");
+    header("Location: reservation.php?CId=".$CId);
 }
 
 
@@ -41,7 +61,7 @@ if(isset($_REQUEST['submit'])){
             <div class="container">
                     <div class="card p-4 bg-dark text-white">
                         <div class="card-head">
-                            <h1>SANN HOTEL</h1>
+                            <h1>LUCANCO HOTEL</h1>
                         </div>
                         <div class="card-body">
                             <form action="#" method="post">
@@ -83,7 +103,7 @@ if(isset($_REQUEST['submit'])){
                                         </div>
                                     </div> -->
                                     <div class="form-group col-md-6">
-                                            <input type="submit" value="Submit" name="submit" class="btn btn-outline-danger ">
+                                            <input type="submit" value="Submit" name="submit" class="btn btn-success ">
                                     </div>
                                     <!-- <div class="form-group col-md-6">
                                         <a href="" name="submit" class="btn btn-danger mt-2">submit</a>

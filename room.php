@@ -1,20 +1,34 @@
 <?php
 $con = mysqli_connect("localhost","root","","hotel");
+    $Reservation_no = $_REQUEST['reservation_no'];
 
 if(isset($_POST['submit'])){
-    $Room_number = $_REQUEST['r_number'];
-    $Numberofmax = $_REQUEST['nubmerofmax'];
+    $Room_number = $_REQUEST['room_number'];
+    //$Numberofmax = $_REQUEST['numberofmax'];
 	$Room = $_REQUEST['room'];
     $b = implode(",",$Room);
     $Room_charge = $_REQUEST['room_charge'];
-    $Bill_no = $_REQUEST['b_no'];
-    $Payment = $_REQUEST['payment'];
-    $c = implode(",",$Payment);
+    $Bill_no = $_REQUEST['bill_no'];
+    $Payment_method = $_REQUEST['payment'];
+    $c = implode(",",$Payment_method);
 	// $Message = $_REQUEST['message'];
 	
-	$Room_details = "INSERT INTO  room(F_name,L_name,Customer_ID,Contact_no,Address) VALUES('$FName','$LName','$CId','$CNo','$Address')";
-	mysqli_query($con,$Room_details);
-    header("location:index.php");
+    // $Room_details = "INSERT INTO  room_details(Room_type,No_of_max_pepole) VALUES('$b','$Numberofmax')";
+    // echo "INSERT INTO  room_de(Room_type,No_of_max_people) VALUES('$b','$Numberofmax')";
+	// mysqli_query($con,$Room_details);
+    //*header("location:index.php");
+
+    $Room = "INSERT INTO  room(Room_number,Room_type,Hotel_ID) VALUES('$Room_number','$b','LGC01')";
+    echo "INSERT INTO  room(Room_number,Room_type,Hotel_ID) VALUES('$Room_number','$b','LGC01')";
+    mysqli_query($con,$Room);
+    
+    $reservation_charge = "INSERT INTO  reservation_charge(Reservation_no,Room_charge) VALUES('$Reservation_no',$Room_charge)";
+    echo "INSERT INTO  reservation_charge(Reservation_no,Room_charge) VALUES('$Reservation_no',$Room_charge)";
+    mysqli_query($con,$reservation_charge);
+    
+    $billing = "INSERT INTO  billing(Billing_no,Reservation_no,Payment_method) VALUES('$Bill_no','$Reservation_no','$c')";
+    echo "INSERT INTO  biiiing(Billing_no,Reservation_no,Payment_method) VALUES('$Bill_no','$Reservation_no','$c')";
+	mysqli_query($con,$billing);
 }
 
 
@@ -47,36 +61,36 @@ if(isset($_POST['submit'])){
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label >Reservation No</label>
-                                        <input type="text" class="form-control" name="r_number"  placeholder="Room Number" require>
+                                        <input  class="form-control" name="re_number"  placeholder="Reservation No" value=<?php echo $Reservation_no ?> >
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label >Room Number</label>
-                                        <input type="text" class="form-control" name="r_number"  placeholder="Room Number" require>
+                                        <input type="text" class="form-control" name="room_number"  placeholder="Room Number" >
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <!-- <div class="form-group col-md-6">
                                         <label > Number Of Maxpeople</label>
-                                        <input type="text" class="form-control" name="numberofmax"  placeholder="Room Number" require>
-                                    </div>
+                                        <input type="text" class="form-control" name="numberofmax"  placeholder="Room Number" >
+                                    </div> -->
                                     
                                     <div class="form-group col-md-6">
                                         <div class="form-group">
                                             <label > Room Type</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" name="room[]"type="checkbox" >
-                                            <label class="form-check-label" for="gridCheck">NON AC</label>
+                                            <input class="form-check-input" name="room[]" type="checkbox" value="Deluxe double room">
+                                            <label class="form-check-label" >Deluxe double room</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" name="room[]"type="checkbox" >
-                                            <label class="form-check-label" for="gridCheck">NON AC</label>
+                                            <input class="form-check-input" name="room[]" type="checkbox" value="Master suite">
+                                            <label class="form-check-label" >Master suite</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" name="room[]"type="checkbox" >
-                                            <label class="form-check-label" for="gridCheck">NON AC</label>
+                                            <input class="form-check-input" name="room[]" type="checkbox" value="Single bedroom" >
+                                            <label class="form-check-label" >Single bedroom</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" name="room[]"type="checkbox" >
-                                            <label class="form-check-label" for="gridCheck">NON AC</label>
+                                            <input class="form-check-input" name="room[]" type="checkbox" value="Supirier double room" >
+                                            <label class="form-check-label" >Supirier double room</label>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -85,18 +99,18 @@ if(isset($_POST['submit'])){
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label >Bill No</label>
-                                        <input type="text" class="form-control" name="b_no"  placeholder="Customer ID">
+                                        <input type="text" class="form-control" name="bill_no"  placeholder="Customer ID">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <div class="form-group">
                                             <label > Paymeny Method</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" name="payment[]"type="checkbox" >
+                                            <input class="form-check-input" name="payment[]" type="checkbox" value="CASH" >
                                             <label class="form-check-label" for="gridCheck">Cach</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" name="payment[]"type="checkbox" >
+                                            <input class="form-check-input" name="payment[]" type="checkbox" value="CARD" >
                                             <label class="form-check-label" for="gridCheck">Card</label>
                                         </div>
                                     </div>
@@ -104,7 +118,7 @@ if(isset($_POST['submit'])){
 
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                            <input type="submit" value="Submit" name="submit" class="btn btn-outline-danger ">
+                                            <input type="submit" value="Submit" name="submit" class="btn btn-success ">
                                     </div>
                                     <!-- <div class="form-group col-md-6">
                                         <a href="view.php" class="btn btn-danger mt-2">view</a>

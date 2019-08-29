@@ -1,3 +1,28 @@
+<?php
+$con = mysqli_connect("localhost","root","","hotel");
+    $cid = $_REQUEST['CId'];
+
+if(isset($_POST['submit'])){
+    //$Customer_id = $_REQUEST['c_id'];
+    $Reservation_no = $_REQUEST['r_no'];
+    $Numberofpeople = $_REQUEST['numberofpeople'];
+    $In_date = $_REQUEST['in_date'];
+    $Out_date = $_REQUEST['out_date'];
+    $Bill_no = $_REQUEST['bill_no'];
+    // $room_charge = $_REQUEST['room_charge'];
+	// $b = implode(",",$room);
+	// $Message = $_REQUEST['message'];
+	
+    $reservation_details = "INSERT INTO  reservation(Reservation_no,Customer_ID,No_of_guests,Check_in_date,Check_out_date,Billing_no) VALUES('$Reservation_no','$cid','$Numberofpeople','$In_date','$Out_date','$Bill_no')";
+    echo  "INSERT INTO  reservation(Reservation_no,Customer_ID,No_of_guests,Check_in_date,Check_out_date,Billing_no) VALUES('$Reservation_no',$cid,'$Numberofpeople','$In_date','$Out_date','$Bill_no')";
+    mysqli_query($con,$reservation_details);
+    header("location:room.php?reservation_no=".$Reservation_no);
+    // ,'$In_date','$Out_date','$Bill_no'
+    // ,Check_in_date,Check_out_date,Billing_no
+}
+
+
+?>
 
 
 <!Doctype html>
@@ -22,11 +47,11 @@
                             <h1>RESERVATION</h1>
                         </div>
                         <div class="card-body">
-                            <form action="reservation.php" method="post">
+                            <form action="#" method="post">
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label >Customer ID</label>
-                                        <input type="text" class="form-control" name="c_id"  placeholder="Customer ID" >
+                                        <input type="text" class="form-control"  name="c_id"  placeholder="Customer ID" value=<?php echo $cid?>>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label >Reservation No</label>
@@ -44,10 +69,10 @@
                                         <label >Check Out Date</label>
                                         <input type="date" class="form-control" name="out_date"  placeholder="Check Out Date">
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <!-- <div class="form-group col-md-6">
                                         <label >Billing No</label>
                                         <input type="text" class="form-control" name="bill_no"  placeholder="Billing No" >
-                                    </div>
+                                    </div> -->
                                     <!-- <div class="form-group col-md-6">
                                         <label >Room Charge</label>
                                         <input type="text" class="form-control" name="room_charge"  placeholder="Room Charge" >
@@ -56,12 +81,12 @@
                                 </div>
 
                                 <div class="row">
-                                    <!-- <div class="form-group col-md-6">
-                                            <input type="submit" value="Submit" name="submit" class="btn btn-outline-danger ">
-                                    </div> -->
                                     <div class="form-group col-md-6">
-                                        <a href="room.php" name="submit" class="btn btn-danger mt-2">Submit</a>
+                                            <input type="submit" value="Submit" name="submit" class="btn btn-success ">
                                     </div>
+                                    <!-- <div class="form-group col-md-6">
+                                        <a href="" name="submit" class="btn btn-danger mt-2">Submit</a>
+                                    </div> -->
                                 </div>
                             </form>
                         </div>
@@ -71,26 +96,3 @@
 </body>
 </html>
 
-<?php
-$con = mysqli_connect("localhost","root","","hotel");
-
-if(isset($_POST['submit'])){
-    $Customer_id = $_REQUEST['c_id'];
-    $Reservation_no = $_REQUEST['r_no'];
-    $Numberofpeople = $_REQUEST['numberofpeople'];
-    $In_date = $_REQUEST['in_date'];
-    $Out_date = $_REQUEST['out_date'];
-    $Bill_no = $_REQUEST['bill_no'];
-    // $room_charge = $_REQUEST['room_charge'];
-	// $b = implode(",",$room);
-	// $Message = $_REQUEST['message'];
-	
-	$reservation_details =  "INSERT INTO  reservation(Reservation_no,No_of_guests,Check_in_date,Check_out_date) VALUES('$Reservation_no','$Numberofpeople','$In_date','$Out_date')";
-	mysqli_query($con,$reservation_details);
-    header("location:room.php");
-    // ,'$In_date','$Out_date','$Bill_no'
-    // ,Check_in_date,Check_out_date,Billing_no
-}
-
-
-?>
