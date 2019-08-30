@@ -2,7 +2,7 @@
 <?php
 
 
-$con = mysqli_connect("localhost","root","","hotel");
+$con = mysqli_connect("localhost","root","","lucanco");
 
 if(isset($_REQUEST['submit'])){
     $FName = $_REQUEST['f_name'];
@@ -10,32 +10,12 @@ if(isset($_REQUEST['submit'])){
     $CId = $_REQUEST['c_id'];
     $CNo = $_REQUEST['c_no'];
     $Address = $_REQUEST['address'];
-	// $room = $_REQUEST['room'];
-	// $b = implode(",",$room);
-	// $Message = $_REQUEST['message'];
+	
 	
 	$Customer_details = "INSERT INTO  customer(F_name,L_name,Customer_ID,Contact_no,Address) VALUES('$FName','$LName','$CId','$CNo','$Address');";
-    echo "INSERT INTO  customer(F_name,L_name,Customer_ID,Contact_no,Address) VALUES('$FName','$LName','$CId','$CNo','$Address')";
     
     $query = mysqli_query($con,$Customer_details);
 
-
-
-    // $reservation_details = "INSERT INTO  res2(Reservation_no,Customer_ID,No_of_guests,Check_in_date,Check_out_date) VALUES('12345325','$CId','5','2019-10-03','2019-10-15')";
-    //     echo "INSERT INTO  res2(Reservation_no,Customer_ID,No_of_guests,Check_in_date,Check_out_date) VALUES('12345325','$CId','5','2019-10-03','2019-10-15')";
-        
-    // $qury = mysqli_query($con,$reservation_details);
-
-    
-
-    
-
-    // $reservation_details = "INSERT INTO  res2(Reservation_no,Customer_ID,No_of_guests,Check_in_date,Check_out_date) VALUES('12345325','$CId','5','2019-10-03','2019-10-15')";
-    // echo "INSERT INTO  res2(Reservation_no,Customer_ID,No_of_guests,Check_in_date,Check_out_date) VALUES('12345325','$CId','5','2019-10-03','2019-10-15')";
-    
-    // mysqli_query($con,$reservation_details);
-    
-    //$Rcustomerid = mysql_insert_id($con);
     header("Location: reservation.php?CId=".$CId);
 }
 
@@ -47,67 +27,47 @@ if(isset($_REQUEST['submit'])){
 <head>
     <title>Dressmore Login system</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-      <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> <link rel="stylesheet" href="style.css">
 
-
-		
-
-
-	
 </head>
-<body id="main" background = " photo\Background\1.png";>
+<body>
     
         <section id="form">
             <div class="container">
                     <div class="card p-4 bg-dark text-white">
-                        <div class="card-head">
+                        <div class="card-head  text-center">
                             <h1>LUCANCO HOTEL</h1>
+                            <img src="image/2.jpg" class="img-fluid" alt="...">
                         </div>
-                        <div class="card-body">
+                        <div class="card-body ">
                             <form action="#" method="post">
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label >First Name</label>
-                                        <input type="text" class="form-control" name="f_name"  placeholder="First Name" require>
+                                        <input type="text" class="form-control text-outline-dark" name="f_name"  placeholder="First Name" required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label >Last Name</label>
-                                        <input type="text" class="form-control" name="l_name"  placeholder="Last Name">
+                                        <input type="text" class="form-control" name="l_name"  placeholder="Last Name"required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label >Customer ID</label>
-                                        <input type="text" class="form-control" name="c_id"  placeholder="Customer ID">
+                                        <input type="text" class="form-control" name="c_id"  placeholder="Customer ID" required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label >Contact No</label>
-                                        <input type="text" class="form-control" name="c_no"  placeholder="Contact No">
+                                        <input type="text" class="form-control" name="c_no"  placeholder="Contact No" required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label >Address</label>
-                                        <textarea name="address" id="" cols="30" class="form-control" ></textarea>
+                                        <textarea name="address" id="" cols="30" class="form-control" required></textarea>
                                     </div>
                                         
                                 </div>
 
                                 <div class="row">
-                                    <!-- <div class="form-group col-md-6">
-                                        <div class="form-check">
-                                            <input class="form-check-input" name="room[]"type="checkbox" id="gridCheck">
-                                            <label class="form-check-label" for="gridCheck">AC</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <div class="form-check">
-                                            <input class="form-check-input" name="room[]"type="checkbox" id="gridCheck">
-                                            <label class="form-check-label" for="gridCheck">NON AC</label>
-                                        </div>
-                                    </div> -->
                                     <div class="form-group col-md-6">
                                             <input type="submit" value="Submit" name="submit" class="btn btn-success ">
                                     </div>
-                                    <!-- <div class="form-group col-md-6">
-                                        <a href="" name="submit" class="btn btn-danger mt-2">submit</a>
-                                    </div> -->
                                 </div>
                             </form>
                         </div>

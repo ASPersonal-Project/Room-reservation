@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2019 at 06:30 PM
+-- Generation Time: Aug 29, 2019 at 07:51 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hotel`
+-- Database: `lucanco`
 --
 
 -- --------------------------------------------------------
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `billing` (
   `Billing_no` varchar(10) NOT NULL,
-  `Reservation_no` char(8) NOT NULL,
+  `Reservation_no` char(8) DEFAULT NULL,
   `Payment_method` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -39,11 +39,10 @@ CREATE TABLE `billing` (
 --
 
 INSERT INTO `billing` (`Billing_no`, `Reservation_no`, `Payment_method`) VALUES
-('190801101', '19080101', 'CASH'),
-('190801102', '19080102', 'CASH'),
-('190802103', '19080201', 'CASH'),
-('190802104', '19080202', 'CASH'),
-('190802105', '19080203', 'CASH');
+('', '', ''),
+('19080205', '19080205', 'CARD'),
+('19080207', '19080206', 'CASH'),
+('19080208', '19080207', 'CARD');
 
 -- --------------------------------------------------------
 
@@ -55,7 +54,7 @@ CREATE TABLE `customer` (
   `Customer_ID` char(10) NOT NULL,
   `F_name` varchar(20) NOT NULL,
   `L_name` varchar(20) DEFAULT NULL,
-  `Contact_no` int(10) NOT NULL,
+  `Contact_no` int(10) DEFAULT NULL,
   `Address` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -70,7 +69,9 @@ INSERT INTO `customer` (`Customer_ID`, `F_name`, `L_name`, `Contact_no`, `Addres
 ('878898991V', 'Nirmal', 'Ranasinghe', 772332426, '46, soyza mawatha, Maratuwa'),
 ('901002544V', 'Nadun', 'Perera', 785395352, '198, Kandy road, Kurunagala '),
 ('919256489V', 'Maduka', 'Munasinghe', 776393567, '18, Palmadulla, rathnapura '),
-('952921215v', 'Anjana', 'Shakthi', 712073771, 'kamburugamuwa');
+('952921215v', 'Anjana', 'Shakthi', 712073771, 'hbh'),
+('952921216v', 'Kaveena', 'Harshani', 712073771, 'hgjhfj'),
+('95292121v', 'thima', 'lu', 712073771, 'sdgg');
 
 -- --------------------------------------------------------
 
@@ -106,20 +107,18 @@ CREATE TABLE `reservation` (
   `Customer_ID` char(10) NOT NULL,
   `No_of_guests` int(3) NOT NULL,
   `Check_in_date` date NOT NULL,
-  `Check_out_date` date NOT NULL,
-  `Billing_no` varchar(10) NOT NULL
+  `Check_out_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `reservation`
 --
 
-INSERT INTO `reservation` (`Reservation_no`, `Customer_ID`, `No_of_guests`, `Check_in_date`, `Check_out_date`, `Billing_no`) VALUES
-('19080101', '878898991V', 2, '2019-08-01', '2019-08-02', '190801101'),
-('19080102', '752844950V', 4, '2019-08-01', '2019-08-02', '190801102'),
-('19080201', '901002544V', 2, '2019-08-02', '2019-08-05', '190802103'),
-('19080202', '697782445V', 6, '2019-08-02', '2019-08-03', '190802104'),
-('19080203', '919256489V', 1, '2019-08-02', '2019-08-03', '190802105');
+INSERT INTO `reservation` (`Reservation_no`, `Customer_ID`, `No_of_guests`, `Check_in_date`, `Check_out_date`) VALUES
+('', '', 0, '0000-00-00', '0000-00-00'),
+('19080205', '952921215v', 5, '2019-08-10', '2019-08-17'),
+('19080206', '952921216v', 3, '2019-08-03', '2019-08-10'),
+('19080207', '95292121v', 4, '2019-08-24', '2019-08-17');
 
 -- --------------------------------------------------------
 
@@ -129,7 +128,7 @@ INSERT INTO `reservation` (`Reservation_no`, `Customer_ID`, `No_of_guests`, `Che
 
 CREATE TABLE `reservation_charge` (
   `Reservation_no` char(8) NOT NULL,
-  `Room_charge` int(11) NOT NULL
+  `Room_charge` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -141,7 +140,11 @@ INSERT INTO `reservation_charge` (`Reservation_no`, `Room_charge`) VALUES
 ('19080102', 13290),
 ('19080201', 23670),
 ('19080202', 19890),
-('19080203', 4490);
+('19080203', 4490),
+('19080204', 50000),
+('19080205', 3500),
+('19080206', 2000),
+('19080207', 25000);
 
 -- --------------------------------------------------------
 
@@ -160,32 +163,18 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`Room_number`, `Room_type`, `Hotel_ID`) VALUES
+('', '', 'LGC01'),
 ('101', 'Single bedroom', 'LGC01'),
 ('102', 'Single bedroom', 'LGC01'),
 ('103', 'Single bedroom', 'LGC01'),
-('104', 'Superior double room', 'LGC01'),
-('105', 'Superior double room', 'LGC01'),
-('106', 'Superior double room', 'LGC01'),
-('107', 'Deluxe double room', 'LGC01'),
-('201', 'Single bedroom', 'LGC01'),
-('202', 'Single bedroom', 'LGC01'),
-('203', 'Superior double room', 'LGC01'),
-('204', 'Superior double room', 'LGC01'),
-('205', 'Superior double room', 'LGC01'),
-('206', 'Superior double room', 'LGC01'),
-('207', 'Superior double room', 'LGC01'),
-('301', 'Master suite', 'LGC01'),
-('302', 'Master suite', 'LGC01'),
-('303', 'Deluxe double room', 'LGC01'),
-('304', 'Deluxe double room', 'LGC01'),
-('305', 'Deluxe double room', 'LGC01'),
-('306', 'Deluxe double room', 'LGC01'),
-('401', 'Master suite', 'LGC01'),
-('402', 'Master suite', 'LGC01'),
-('403', 'Master suite', 'LGC01'),
-('404', 'Deluxe double room', 'LGC01'),
-('405', 'Deluxe double room', 'LGC01'),
-('406', 'Deluxe double room', 'LGC01');
+('104', 'Deluxe double room', 'LGC01'),
+('105', 'Supirier double room', 'LGC01'),
+('106', 'Supirier double room', 'LGC01'),
+('107', 'Master suite', 'LGC01'),
+('108', 'Master suite', 'LGC01'),
+('500', 'Master suite', 'LGC01'),
+('501', 'Master suite', 'LGC01'),
+('503', 'Supirier double room', 'LGC01');
 
 -- --------------------------------------------------------
 
@@ -208,6 +197,27 @@ INSERT INTO `room_details` (`Room_type`, `Rates`, `No_of_max_pepole`) VALUES
 ('Master suite', 19890, 6),
 ('Single bedroom', 4490, 1),
 ('Superior double room', 7890, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `room_number`
+--
+
+CREATE TABLE `room_number` (
+  `reservation_no` char(8) NOT NULL,
+  `Room_number` varchar(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `room_number`
+--
+
+INSERT INTO `room_number` (`reservation_no`, `Room_number`) VALUES
+('', ''),
+('19080205', '500'),
+('19080206', '501'),
+('19080207', '503');
 
 --
 -- Indexes for dumped tables
@@ -237,8 +247,7 @@ ALTER TABLE `hotel`
 --
 ALTER TABLE `reservation`
   ADD PRIMARY KEY (`Reservation_no`),
-  ADD KEY `Customer_ID` (`Customer_ID`),
-  ADD KEY `Billing_no` (`Billing_no`);
+  ADD KEY `reservation_ibfk_1` (`Customer_ID`);
 
 --
 -- Indexes for table `reservation_charge`
@@ -251,13 +260,20 @@ ALTER TABLE `reservation_charge`
 --
 ALTER TABLE `room`
   ADD PRIMARY KEY (`Room_number`),
-  ADD KEY `Hotel_ID` (`Hotel_ID`);
+  ADD KEY `room_ibfk_1` (`Hotel_ID`);
 
 --
 -- Indexes for table `room_details`
 --
 ALTER TABLE `room_details`
   ADD PRIMARY KEY (`Room_type`);
+
+--
+-- Indexes for table `room_number`
+--
+ALTER TABLE `room_number`
+  ADD PRIMARY KEY (`reservation_no`,`Room_number`),
+  ADD KEY `Room_number` (`Room_number`);
 
 --
 -- Constraints for dumped tables
@@ -273,14 +289,20 @@ ALTER TABLE `billing`
 -- Constraints for table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`Customer_ID`) REFERENCES `customer` (`Customer_ID`),
-  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`Billing_no`) REFERENCES `billing` (`Billing_no`);
+  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`Customer_ID`) REFERENCES `customer` (`Customer_ID`);
 
 --
 -- Constraints for table `room`
 --
 ALTER TABLE `room`
   ADD CONSTRAINT `room_ibfk_1` FOREIGN KEY (`Hotel_ID`) REFERENCES `hotel` (`Hotel_ID`);
+
+--
+-- Constraints for table `room_number`
+--
+ALTER TABLE `room_number`
+  ADD CONSTRAINT `room_number_ibfk1` FOREIGN KEY (`reservation_no`) REFERENCES `reservation` (`Reservation_no`),
+  ADD CONSTRAINT `room_number_ibfk2` FOREIGN KEY (`Room_number`) REFERENCES `room` (`Room_number`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
